@@ -18,7 +18,7 @@ export const verifyEmailExistMiddleware = async (
   const queryResult: UserResult = await client.query(queryString);
 
   if (queryResult.rowCount > 0) {
-    throw new AppError("E-mail already registered", 409);
+    throw new AppError("E-mail already registered!", 409);
   }
 
   return next();

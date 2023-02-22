@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
-import { createUserService, listUsersService } from "../services";
-import { iUser, iUserRequest } from "../interfaces";
+import {
+  createUserService,
+  deleteUserService,
+  listUsersService,
+} from "../services";
+import { iUserRequest } from "../interfaces";
 
 export const createUserController = async (
   req: Request,
@@ -17,4 +21,13 @@ export const listUsersController = async (
 ): Promise<Response> => {
   const users = await listUsersService();
   return res.json(users);
+};
+
+export const deleteUserController = async (
+  req: Request,
+  res: Response
+): Promise<Response | void> => {
+  const id: number = Number(req.params.id);
+  await deleteUserService(id);
+  return res.status(204).send();
 };
