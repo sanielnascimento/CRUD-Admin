@@ -23,3 +23,23 @@ export const verifyEmailExistMiddleware = async (
 
   return next();
 };
+
+export const verifyUserExistMiddleware = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response | void> => {
+  const id: number = parseInt(req.params.id);
+  const queryString: string = format(
+    `SELECT * FROM users WHERE id = (%s);`,
+    id
+  );
+
+  const queryResult: UserResult = await client.query(queryString);
+
+  if (queryResult.rowCount === 0) {
+    throw new AppError("User not found!", 404);
+  }
+
+  return next();
+};

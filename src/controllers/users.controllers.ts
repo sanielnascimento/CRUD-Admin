@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createUserService, retrieveUserService } from "../services";
+import { createUserService, listUsersService } from "../services";
 import { iUser, iUserRequest } from "../interfaces";
 
 export const createUserController = async (
@@ -11,11 +11,10 @@ export const createUserController = async (
   return res.status(201).json(newUser);
 };
 
-export const retriveUserController = async (
+export const listUsersController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const userId: number = Number(req.params.id);
-  const user = await retrieveUserService(userId)
-  return res.json(user);
+  const users = await listUsersService();
+  return res.json(users);
 };

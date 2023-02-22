@@ -1,4 +1,4 @@
 import { createUserService } from "./createUsers.service";
-import { retrieveUserService } from "./retrieveUser.service";
+import { listUsersService } from "./listUsers.service";
 
-export { createUserService, retrieveUserService };
+export { createUserService, listUsersService };
