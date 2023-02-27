@@ -1,3 +1,20 @@
-import { createUserService, listUsersService, deleteUserService } from "./users";
+import {
+  createUserService,
+  listUsersService,
+  retrieveUserService,
+  updateUserService,
+  deleteUserService,
+  recoverUserService,
+} from "./users";
 
-export { createUserService, listUsersService, deleteUserService };
+import { loginSessionService } from "./session";
+
+export {
+  createUserService,
+  loginSessionService,
+  listUsersService,
+  retrieveUserService,
+  updateUserService,
+  deleteUserService,
+  recoverUserService,
+};

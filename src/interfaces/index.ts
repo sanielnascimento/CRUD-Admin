@@ -1,8 +1,12 @@
 import {
-  iUserRequest,
-  iUser,
-  UserWithoutPassword,
+  tUser,
+  tUserRequest,
+  tUpdateRequest,
+  tUserResponse,
+  FullUserResult,
   UserResult,
 } from "./users.interface";
 
-export { iUserRequest, iUser, UserWithoutPassword, UserResult };
+import { tLoginRequest } from "./login.interface"
+
+export { tUser, tUserRequest, tUpdateRequest, tUserResponse, FullUserResult, UserResult, tLoginRequest };

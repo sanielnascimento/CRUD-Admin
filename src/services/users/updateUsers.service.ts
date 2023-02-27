@@ -1,14 +1,18 @@
-import { tUserRequest, tUserResponse, UserResult } from "../../interfaces";
+import { tUpdateRequest, tUserResponse, UserResult } from "../../interfaces";
 import { client } from "../../database";
 import format from "pg-format";
 import { noPasswaordUserSchema } from "../../schemas";
 
-export const createUserService = async ( body: tUserRequest): Promise<tUserResponse> => {
+export const updateUserService = async (
+  body: tUpdateRequest,
+  id: number
+): Promise<tUserResponse> => {
   const queryResult: UserResult = await client.query(
     format(
-      "INSERT INTO users (%I) VALUES (%L) RETURNING *;",
+      "UPDATE users SET (%I) = ROW (%L) WHERE id = (%s) RETURNING *;",
       Object.keys(body),
-      Object.values(body)
+      Object.values(body),
+      id
     )
   );
 

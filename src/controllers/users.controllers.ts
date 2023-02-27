@@ -3,31 +3,32 @@ import {
   createUserService,
   deleteUserService,
   listUsersService,
+  recoverUserService,
+  retrieveUserService,
+  updateUserService,
 } from "../services";
-import { iUserRequest } from "../interfaces";
 
-export const createUserController = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
-  const userData: iUserRequest = req.body;
-  const newUser = await createUserService(userData);
-  return res.status(201).json(newUser);
+export const createUserController = async (req: Request, res: Response): Promise<Response> => {
+  return res.status(201).json(await createUserService(req.body));
 };
 
-export const listUsersController = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
-  const users = await listUsersService();
-  return res.json(users);
+export const listUsersController = async (_: Request, res: Response): Promise<Response> => {
+  return res.json(await listUsersService());
 };
 
-export const deleteUserController = async (
-  req: Request,
-  res: Response
-): Promise<Response | void> => {
-  const id: number = Number(req.params.id);
-  await deleteUserService(id);
+export const retrieveUserController = async (req: Request, res: Response): Promise<Response> => {
+  return res.json(await retrieveUserService(Number(req.user.id)));
+};
+
+export const updateUserController = async (req: Request, res: Response): Promise<Response> => {
+  return res.status(200).json(await updateUserService(req.body, Number(req.params.id)));
+};
+
+export const deleteUserController = async (req: Request, res: Response): Promise<Response> => {
+  await deleteUserService(Number(req.params.id));
   return res.status(204).send();
+};
+
+export const recoverUserController = async (req: Request, res: Response): Promise<Response> => {
+  return res.status(200).json(await recoverUserService(Number(req.params.id)));
 };

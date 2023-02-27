@@ -1,19 +1,8 @@
-import { UserWithoutPassword } from "../../interfaces";
+import { tUserResponse, UserResult } from "../../interfaces";
 import { client } from "../../database";
-import format from "pg-format";
+import { allNoPassUsersSchema } from "../../schemas";
 
-export const listUsersService = async (): Promise<
-  Array<UserWithoutPassword>
-> => {
-  const queryString: string = format(`
-    SELECT 
-        users.id, 
-        users.name, 
-        users.email, 
-        users.admin, 
-        users.active 
-    FROM 
-        users;`);
-  const queryResult = await client.query(queryString);
-  return queryResult.rows;
+export const listUsersService = async (): Promise<Array<tUserResponse>> => {
+  const queryResult: UserResult = await client.query("SELECT * FROM users;");
+  return allNoPassUsersSchema.parse(queryResult.rows);
 };

@@ -1,7 +1,8 @@
 import { app } from "./app";
 import { startDatabase } from "./database";
+import "dotenv/config";
 
-const PORT: number = 3000;
+const PORT: number = Number(process.env.APP_PORT!);
 const runningMsg: string = `Server is running on port http://localhost:${PORT}`;
 
 app.listen(PORT, async () => {
