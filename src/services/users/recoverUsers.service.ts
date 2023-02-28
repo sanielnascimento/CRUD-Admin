@@ -19,4 +19,5 @@ export const recoverUserService = async (
     [id]
   );
 
-  return noPasswaordUserSchema.parse(queryResult.rows[0]);};
+  return noPasswaordUserSchema.parse(queryResult.rows[0]);
+};
