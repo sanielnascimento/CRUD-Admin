@@ -1,7 +1,7 @@
 import { client } from "../../database";
 import { tUserResponse, UserResult } from "../../interfaces";
 import { AppError } from "../../errors";
-import { userSchema } from "../../schemas";
+import { noPasswaordUserSchema } from "../../schemas";
 
 export const recoverUserService = async (
   id: number
@@ -19,5 +19,4 @@ export const recoverUserService = async (
     [id]
   );
 
-  return userSchema.parse(queryResult.rows[0]);
-};
+  return noPasswaordUserSchema.parse(queryResult.rows[0]);};
